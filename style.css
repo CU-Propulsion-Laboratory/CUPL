@@ -1,0 +1,57 @@
+/* Sunrise theme: one sunrise picture fixed behind the whole page (dark purple sky at the top, pink, orange and a yellow glow lower down, mountains at the bottom).
+   Content sits on dark glass cards so the text stays readable as you scroll. */
+:root{
+  --ink:#f6f4ff; --muted:#c9cfe6; --line:rgba(255,255,255,.2);
+  --glass:rgba(10,14,32,.8); --burn:#ffb84d; --burn-ink:#ffd27a; --btn-bg:#ffcf4a; --btn-ink:#2a1405;
+  --ground:#0a0f1c; --surface:rgba(255,255,255,.07);
+  --head:"Archivo","Helvetica Neue",Arial,sans-serif; --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  color-scheme:dark;
+}
+html{scroll-padding-top:72px;scroll-behavior:smooth;background:var(--ground)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;color:var(--ink);font:400 1.125rem/1.65 var(--body);position:relative}
+/* the fixed sunrise: sky and glow, then mountains on top of them */
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(ellipse 55% 32% at 68% 74%,rgba(255,240,170,.85),rgba(255,240,170,0) 70%),
+    linear-gradient(to bottom,#1d2347 0%,#383366 22%,#6a3f7a 38%,#c25a7a 54%,#ff8a3d 66%,#ffd04d 78%,#ffe9a0 92%)}
+body::after{content:"";position:fixed;left:0;right:0;bottom:0;height:clamp(170px,30vh,360px);z-index:-1;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 1600 260%27 preserveAspectRatio=%27xMidYMax slice%27%3E%3Cpath fill=%27%233a2f55%27 fill-opacity=%27.7%27 d=%27M0 260V170L120 148L220 164L340 118L450 140L560 98L680 130L780 88L900 114L1020 78L1140 108L1260 94L1380 130L1500 108L1600 140V260Z%27/%3E%3Cpath fill=%27%23171a33%27 d=%27M0 260V200L150 178L260 190L330 150L470 118L520 126L560 190L610 150L760 98L800 108L830 190L880 140L1010 86L1050 98L1075 190L1120 130L1180 62L1215 52L1255 62L1290 100L1330 190L1420 170L1600 196V260Z%27/%3E%3Cpath fill=%27%23ffffff%27 fill-opacity=%27.16%27 d=%27M330 150L470 118L520 126L430 190ZM610 150L760 98L800 108L700 190ZM880 140L1010 86L1050 98L950 190ZM1120 130L1180 62L1215 52L1255 62L1180 150Z%27/%3E%3Cpath fill=%27%230a0f1c%27 d=%27M0 260V222C240 206 480 226 760 216C1040 206 1320 212 1600 224V260Z%27/%3E%3C/svg%3E") center bottom/cover no-repeat}
+main{flex:1}
+a{color:inherit}
+:focus-visible{outline:3px solid #ffd04d;outline-offset:3px}
+h1,h2,h3{font-family:var(--head);line-height:1.05;margin:0;letter-spacing:-.01em}
+.wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 24px}
+p{max-width:62ch;margin:0 0 1em}
+
+/* header and navigation */
+header.top{position:sticky;top:0;z-index:5;background:rgba(10,15,28,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:56px}
+.logo{font:800 1.05rem var(--head);font-stretch:112%;text-decoration:none;white-space:nowrap}
+nav{display:flex;gap:20px;overflow-x:auto;padding:4px 0}
+nav a{font:700 .95rem var(--head);text-decoration:none;color:var(--muted);white-space:nowrap;padding:4px 0;border-bottom:3px solid transparent}
+nav a:hover{color:var(--burn-ink)}
+nav a[aria-current="page"]{color:var(--ink);border-bottom-color:#ffd04d}
+
+/* page title area: transparent, so the sunrise shows through */
+.page-title{padding:64px 0 48px}
+.page-title h1{font-size:clamp(2.2rem,6vw,4rem);font-weight:900;font-stretch:116%;max-width:18ch}
+.page-title p{font-size:1.25rem;color:var(--ink);margin-top:20px}
+
+/* content cards: every section is a dark glass card floating over the sunrise */
+section{padding:0 0 28px;border-top:0}
+section>.wrap>*:first-child{margin-top:0}
+section>.wrap,.card{background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:12px;padding:40px 32px;max-width:1032px}
+@media (max-width:640px){section>.wrap,.card{padding:28px 20px;border-radius:10px;width:calc(100% - 24px)}}
+section h2{font-size:clamp(1.9rem,4.5vw,3rem);font-weight:850;font-stretch:108%;margin-bottom:24px;max-width:20ch}
+h3{font-size:1.25rem;font-weight:800;margin-bottom:8px}
+.cols{display:grid;gap:32px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.cols p{margin:0;color:var(--muted)}
+.cols>div{border-left:3px solid var(--burn);padding-left:16px}
+.note{color:var(--muted);font-size:1rem;margin-top:24px}
+
+/* buttons and links */
+.btn{display:inline-block;font:800 1rem var(--head);text-decoration:none;background:var(--btn-bg);color:var(--btn-ink);padding:12px 22px;border-radius:4px}
+.btn:hover{filter:brightness(1.08)}
+.link{font:800 1rem var(--head);color:var(--burn-ink);text-decoration:underline;text-underline-offset:4px}
+
+footer{padding:24px 0 28px;color:var(--ink);font-size:.95rem;background:rgba(10,15,28,.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-top:1px solid var(--line)}
